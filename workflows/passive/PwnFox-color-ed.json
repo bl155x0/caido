@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Color handling for PwnFox",
   "edition": 2,
   "graph": {
     "edges": [
@@ -103,7 +103,7 @@
           {
             "alias": "color",
             "value": {
-              "data": "#FF5722",
+              "data": "#ff3300",
               "kind": "string"
             }
           }
