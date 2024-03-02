@@ -1,0 +1,113 @@
+{
+  "description": "Parses a given UNIX timestamp to a human readable date.",
+  "edition": 2,
+  "graph": {
+    "edges": [
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 0
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 2
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "alias": "convert_start",
+        "definition_id": "caido/convert-start",
+        "display": {
+          "x": -10,
+          "y": -200
+        },
+        "id": 0,
+        "inputs": [],
+        "name": "Convert Start",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "convert_end",
+        "definition_id": "caido/convert-end",
+        "display": {
+          "x": 0,
+          "y": 100
+        },
+        "id": 1,
+        "inputs": [
+          {
+            "alias": "data",
+            "value": {
+              "data": "$shell.data",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "Convert End",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "shell",
+        "definition_id": "caido/shell-cmd",
+        "display": {
+          "x": -10,
+          "y": -60
+        },
+        "id": 2,
+        "inputs": [
+          {
+            "alias": "init",
+            "value": {
+              "data": "",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "timeout",
+            "value": {
+              "data": 2000,
+              "kind": "integer"
+            }
+          },
+          {
+            "alias": "data",
+            "value": {
+              "data": "$convert_start.data",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "shell",
+            "value": {
+              "data": "bash",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "code",
+            "value": {
+              "data": "xargs -I{} date -d @{}",
+              "kind": "string"
+            }
+          }
+        ],
+        "name": "Shell",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "id": "4529411b-082f-4822-acd4-d2e2eb7d4683",
+  "kind": "convert",
+  "name": "Parse UNIX timestamp"
+}
