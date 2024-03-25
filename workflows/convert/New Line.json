@@ -1,0 +1,55 @@
+{
+  "description": "Just inserts %0d%0a as new line",
+  "edition": 2,
+  "graph": {
+    "edges": [
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "alias": "convert_end",
+        "definition_id": "caido/convert-end",
+        "display": {
+          "x": 40,
+          "y": -100
+        },
+        "id": 1,
+        "inputs": [
+          {
+            "alias": "data",
+            "value": {
+              "data": "JTBkJTBh",
+              "kind": "bytes"
+            }
+          }
+        ],
+        "name": "Convert End",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "convert_start",
+        "definition_id": "caido/convert-start",
+        "display": {
+          "x": 40,
+          "y": -240
+        },
+        "id": 2,
+        "inputs": [],
+        "name": "Convert Start",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "id": "239b8eda-5aa8-4f18-876a-e156e85247c1",
+  "kind": "convert",
+  "name": "New Line"
+}
