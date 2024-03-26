@@ -1,5 +1,5 @@
 {
-  "description": "Collects JavaScript URLs to /tmp/caido/jsloot.txt",
+  "description": "Collects JavaScript URLs in a file per project.",
   "edition": 2,
   "graph": {
     "edges": [
@@ -131,7 +131,7 @@
           {
             "alias": "code",
             "value": {
-              "data": "mkdir -p /tmp/caido && grep -qxF $CAIDO_URL /tmp/caido/jsloot.txt || echo $CAIDO_URL >> /tmp/caido/jsloot.txt",
+              "data": "grep -qxF $CAIDO_URL /home/benny/Workspace/h4ckb0x/Projects/jsloot/jsloot_$CAIDO_PROJECT.txt || echo $CAIDO_URL >> /home/benny/Workspace/h4ckb0x/Projects/jsloot/jsloot_$CAIDO_PROJECT.txt",
               "kind": "string"
             }
           }
@@ -163,8 +163,8 @@
         "alias": "on_intercept_response",
         "definition_id": "caido/on-intercept-response",
         "display": {
-          "x": -40,
-          "y": -460
+          "x": -50,
+          "y": -390
         },
         "id": 5,
         "inputs": [],
