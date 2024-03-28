@@ -1,5 +1,5 @@
 {
-  "description": "Collects JavaScript URLs in a file per project.",
+  "description": "Collects JavaScript URLs  using jsloot.\nhttps://github.com/bl155x0/jsloot\n",
   "edition": 2,
   "graph": {
     "edges": [
@@ -49,8 +49,8 @@
         "alias": "passive_end",
         "definition_id": "caido/passive-end",
         "display": {
-          "x": -10,
-          "y": 220
+          "x": -60,
+          "y": 200
         },
         "id": 1,
         "inputs": [],
@@ -95,8 +95,8 @@
         "alias": "shell",
         "definition_id": "caido/http-shell-cmd",
         "display": {
-          "x": -20,
-          "y": 60
+          "x": -60,
+          "y": 50
         },
         "id": 3,
         "inputs": [
@@ -131,7 +131,7 @@
           {
             "alias": "code",
             "value": {
-              "data": "grep -qxF $CAIDO_URL /home/benny/Workspace/h4ckb0x/Projects/jsloot/jsloot_$CAIDO_PROJECT.txt || echo $CAIDO_URL >> /home/benny/Workspace/h4ckb0x/Projects/jsloot/jsloot_$CAIDO_PROJECT.txt",
+              "data": "JS_LOOT_DIR=\"/home/benny/h4ckb0x/$CAIDO_PROJECT/jsloot/\"\njsloot add -d $JS_LOOT_DIR $CAIDO_URL",
               "kind": "string"
             }
           }
@@ -175,5 +175,5 @@
   },
   "id": "d26526b8-e0fa-4e9e-b53e-84297c5c2685",
   "kind": "passive",
-  "name": "JSLootURL"
+  "name": "JSLoot"
 }
