@@ -131,7 +131,7 @@
           {
             "alias": "code",
             "value": {
-              "data": "JS_LOOT_DIR=\"/home/benny/h4ckb0x/$CAIDO_PROJECT/jsloot/\"\njsloot add -d $JS_LOOT_DIR $CAIDO_URL",
+              "data": "JS_LOOT_DIR=\"/home/benny/h4ckb0x/$CAIDO_PROJECT/jsloot/jsloot.txt\"\njsloot add -f $JS_LOOT_DIR $CAIDO_URL",
               "kind": "string"
             }
           }
