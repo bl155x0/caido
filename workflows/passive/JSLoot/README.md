@@ -6,7 +6,7 @@ These passive workflows utilize [jsloot](https://github.com/bl155x0/jsloot) to g
 - Import this workflow to `caido` 
 - Adjust the paths in the `bash` block to where the files should be be written
 
-### JSLootAdd
+## JSLootAdd
 
 This workflow executed `jsloot add` for each identified JavaScript file, consolditing the JavaScript URLs into a single file.
 
