@@ -1,0 +1,179 @@
+{
+  "description": "Collects JavaScript URLs  using jsloot.\nhttps://github.com/bl155x0/jsloot\n",
+  "edition": 2,
+  "graph": {
+    "edges": [
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 3
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 4
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "true",
+          "node_id": 4
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 3
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 5
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 2
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "alias": "passive_end",
+        "definition_id": "caido/passive-end",
+        "display": {
+          "x": -60,
+          "y": 200
+        },
+        "id": 1,
+        "inputs": [],
+        "name": "Passive End",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "matches_httpql",
+        "definition_id": "caido/httpql-matches",
+        "display": {
+          "x": -50,
+          "y": -240
+        },
+        "id": 2,
+        "inputs": [
+          {
+            "alias": "query",
+            "value": {
+              "data": "resp.raw.cont:\"application/javascript\"",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "response",
+            "value": {
+              "data": "$on_intercept_response.response",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "request",
+            "value": {
+              "data": "$on_intercept_response.request",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "Matches HTTPQL",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "shell",
+        "definition_id": "caido/http-shell-cmd",
+        "display": {
+          "x": -60,
+          "y": 50
+        },
+        "id": 3,
+        "inputs": [
+          {
+            "alias": "init",
+            "value": {
+              "data": "",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "timeout",
+            "value": {
+              "data": 2000,
+              "kind": "integer"
+            }
+          },
+          {
+            "alias": "shell",
+            "value": {
+              "data": "bash",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "request",
+            "value": {
+              "data": "$on_intercept_response.request",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "code",
+            "value": {
+              "data": "JS_LOOT_DIR=\"/home/benny/h4ckb0x/$CAIDO_PROJECT/jsloot/\"\njsloot get -u $CAIDO_URL -d $JS_LOOT_DIR",
+              "kind": "string"
+            }
+          }
+        ],
+        "name": "Shell",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "if_else",
+        "definition_id": "caido/if-else",
+        "display": {
+          "x": -50,
+          "y": -90
+        },
+        "id": 4,
+        "inputs": [
+          {
+            "alias": "condition",
+            "value": {
+              "data": "$matches_httpql.matches",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "If/Else",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "on_intercept_response",
+        "definition_id": "caido/on-intercept-response",
+        "display": {
+          "x": -50,
+          "y": -390
+        },
+        "id": 5,
+        "inputs": [],
+        "name": "On Intercept Response",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "id": "d26526b8-e0fa-4e9e-b53e-84297c5c2685",
+  "kind": "passive",
+  "name": "JSLootGet"
+}
