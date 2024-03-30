@@ -3,7 +3,7 @@
 
 These passive workflows utilize [jsloot](https://github.com/bl155x0/jsloot) to gather all identified JavaScript files from a target while browsing with `caido`.
 
-- Import this workflow to `caido` 
+- Import the workflows to `caido` 
 - Adjust the paths in the `bash` block to where the files should be be written
 
 ## JSLootAdd
