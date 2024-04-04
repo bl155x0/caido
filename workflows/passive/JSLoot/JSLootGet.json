@@ -67,13 +67,6 @@
         "id": 2,
         "inputs": [
           {
-            "alias": "query",
-            "value": {
-              "data": "resp.raw.cont:\"application/javascript\"",
-              "kind": "string"
-            }
-          },
-          {
             "alias": "response",
             "value": {
               "data": "$on_intercept_response.response",
@@ -85,6 +78,13 @@
             "value": {
               "data": "$on_intercept_response.request",
               "kind": "ref"
+            }
+          },
+          {
+            "alias": "query",
+            "value": {
+              "data": "resp.raw.cont:\"application/javascript\" or resp.raw.cont:\"text/javascript\"",
+              "kind": "string"
             }
           }
         ],
