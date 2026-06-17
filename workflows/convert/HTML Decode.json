@@ -1,5 +1,5 @@
 {
-  "description": "Decodes HTML encoded text",
+  "description": "Decodes HTML entities back into their original characters.",
   "edition": 2,
   "graph": {
     "edges": [

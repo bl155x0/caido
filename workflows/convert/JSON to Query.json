@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Converts a flat JSON object into a URL query string, e.g. {\"a\":\"1\",\"b\":\"2\"} becomes a=1&b=2.",
   "edition": 2,
   "graph": {
     "edges": [

@@ -1,5 +1,5 @@
 {
-  "description": "String to HEX",
+  "description": "Encodes the input string as uppercase hexadecimal.",
   "edition": 2,
   "graph": {
     "edges": [

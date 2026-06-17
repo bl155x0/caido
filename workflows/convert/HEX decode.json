@@ -1,5 +1,5 @@
 {
-  "description": "HEX to String",
+  "description": "Decodes a hexadecimal string back into its original text.",
   "edition": 2,
   "graph": {
     "edges": [

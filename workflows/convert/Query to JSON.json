@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Converts a URL query string into a JSON object, e.g. a=1&b=2 becomes {\"a\":\"1\",\"b\":\"2\"}. The inverse of JSON to Query.",
   "edition": 2,
   "graph": {
     "edges": [

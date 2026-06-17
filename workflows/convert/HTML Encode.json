@@ -1,5 +1,5 @@
 {
-  "description": "Encodes text using HTML encoding",
+  "description": "HTML-entity encodes the input, e.g. \"<\" becomes \"&lt;\".",
   "edition": 2,
   "graph": {
     "edges": [
