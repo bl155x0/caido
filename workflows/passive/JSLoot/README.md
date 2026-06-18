@@ -1,15 +1,12 @@
 # JSLoot
 
-
 These passive workflows utilize [jsloot](https://github.com/bl155x0/jsloot) to gather all identified JavaScript files from a target while browsing with `caido`.
 
 - Import the workflows to `caido` 
-- Adjust the paths in the `bash` block to where the files should be be written
+- Set the following variables in `~/.config/jsloot/env`
 
-## JSLootAdd
+```
+JSLOOT_BINARY=...
+JSLOOT_DIR=/tmp/h4ckb0x/jsloot/
+```
 
-This workflow executed `jsloot add` for each identified JavaScript file, consolditing the JavaScript URLs into a single file.
-
-## JSLootGet
-
-A workflow that executes `jsloot get` for each identified JavaScript file. This downloads the JavaScript files and stores them in beautified format.

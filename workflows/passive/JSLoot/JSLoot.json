@@ -1,0 +1,204 @@
+{
+  "description": "Collects JS Files from targets",
+  "edition": 2,
+  "graph": {
+    "edges": [
+      {
+        "source": {
+          "exec_alias": "false",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "true",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 4
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 4
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 5
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 6
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "true",
+          "node_id": 6
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 2
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "false",
+          "node_id": 6
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "alias": "passive_end",
+        "definition_id": "caido/passive-end",
+        "display": {
+          "x": 280,
+          "y": 20
+        },
+        "id": 1,
+        "name": "Passive End",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "matches_httpql",
+        "definition_id": "caido/httpql-matches",
+        "display": {
+          "x": -60,
+          "y": -30
+        },
+        "id": 2,
+        "inputs": [
+          {
+            "alias": "query",
+            "value": {
+              "data": "resp.raw.cont:\"application/javascript\" or resp.raw.cont:\"text/javascript\"",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "response",
+            "value": {
+              "data": "$my_response.response",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "request",
+            "value": {
+              "data": "$my_response.request",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "Matches HTTPQL",
+        "version": "0.2.0"
+      },
+      {
+        "alias": "shell",
+        "definition_id": "caido/http-shell-cmd",
+        "display": {
+          "x": 120,
+          "y": -90
+        },
+        "id": 4,
+        "inputs": [
+          {
+            "alias": "timeout",
+            "value": {
+              "data": 2000,
+              "kind": "integer"
+            }
+          },
+          {
+            "alias": "shell",
+            "value": {
+              "data": "bash",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "response",
+            "value": {
+              "data": "$my_response.response",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "request",
+            "value": {
+              "data": "$my_response.request",
+              "kind": "ref"
+            }
+          },
+          {
+            "alias": "init",
+            "value": {
+              "data": "[ -f ~/.config/jsloot/env ] && source ~/.config/jsloot/env ",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "code",
+            "value": {
+              "data": "# Available env variables\n# ---\n# $CAIDO_URL: Request URL\n# $CAIDO_PROJECT: Project name\n# $CAIDO_REQUEST_HEADER__[HEADER_NAME]: Request headers\n\n# Available via STDIN\n# ---\n# Raw request\n# REQUEST=`cat - | jq -r .request | base64 -d`\n#\n# Raw response\n# RESPONSE=`cat - | jq -r .response | base64 -d`\n\necho $CAIDO_URL > /tmp/x\n\nJSLOOT_DIR=\"${JSLOOT_DIR:-/tmp/jsloot}\"\nRESPONSE=$(cat - | jq -r .response | base64 -d)\nBODY=$(printf '%s' \"$RESPONSE\" | awk 'BEGIN{h=1} h && /^\\r?$/{h=0; next} !h{print}')\njq -n --arg url \"$CAIDO_URL\" --arg content \"$BODY\" '{URL: $url, content: $content}' | \"$JSLOOT_BINARY\" store -d \"$JSLOOT_DIR\"\n",
+              "kind": "string"
+            }
+          }
+        ],
+        "name": "Shell",
+        "version": "0.2.0"
+      },
+      {
+        "alias": "my_response",
+        "definition_id": "caido/on-intercept-response",
+        "display": {
+          "x": -440,
+          "y": 40
+        },
+        "id": 5,
+        "name": "My Response",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "in_scope",
+        "definition_id": "caido/in-scope",
+        "display": {
+          "x": -250,
+          "y": 50
+        },
+        "id": 6,
+        "inputs": [
+          {
+            "alias": "request",
+            "value": {
+              "data": "$my_response.request",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "In Scope",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "id": "664ae4fd-a86e-46ae-8f93-2a13250dcda1",
+  "kind": "passive",
+  "name": "JSLoot"
+}
