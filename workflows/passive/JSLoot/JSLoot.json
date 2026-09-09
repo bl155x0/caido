@@ -157,7 +157,7 @@
           {
             "alias": "code",
             "value": {
-              "data": "# Available env variables\n# ---\n# $CAIDO_URL: Request URL\n# $CAIDO_PROJECT: Project name\n# $CAIDO_REQUEST_HEADER__[HEADER_NAME]: Request headers\n\n# Available via STDIN\n# ---\n# Raw request\n# REQUEST=`cat - | jq -r .request | base64 -d`\n#\n# Raw response\n# RESPONSE=`cat - | jq -r .response | base64 -d`\n\necho $CAIDO_URL > /tmp/x\n\nJSLOOT_DIR=\"${JSLOOT_DIR:-/tmp/jsloot}\"\nRESPONSE=$(cat - | jq -r .response | base64 -d)\nBODY=$(printf '%s' \"$RESPONSE\" | awk 'BEGIN{h=1} h && /^\\r?$/{h=0; next} !h{print}')\njq -n --arg url \"$CAIDO_URL\" --arg content \"$BODY\" '{URL: $url, content: $content}' | \"$JSLOOT_BINARY\" store -d \"$JSLOOT_DIR\"\n",
+              "data": "# Available env variables\n# ---\n# $CAIDO_URL: Request URL\n# $CAIDO_PROJECT: Project name\n# $CAIDO_REQUEST_HEADER__[HEADER_NAME]: Request headers\n\n# Available via STDIN\n# ---\n# Raw request\n# REQUEST=`cat - | jq -r .request | base64 -d`\n#\n# Raw response\n# RESPONSE=`cat - | jq -r .response | base64 -d`\n\necho $CAIDO_URL > /tmp/x\n\nJSLOOT_DIR=\"${JSLOOT_DIR:-/tmp/jsloot}\"\nRESPONSE=$(cat - | jq -r .response | base64 -d)\nBODY=$(printf '%s' \"$RESPONSE\" | awk 'BEGIN{h=1} h && /^\\r?$/{h=0; next} !h{print}')\nBEAUTIFY_FLAG=\"-b=false\"\n[ \"$JSLOOT_BEAUTIFY\" = \"TRUE\" ] && BEAUTIFY_FLAG=\"-b\"\njq -n --arg url \"$CAIDO_URL\" --arg content \"$BODY\" '{URL: $url, content: $content}' | \"$JSLOOT_BINARY\" store -d \"$JSLOOT_DIR\" $BEAUTIFY_FLAG\n",
               "kind": "string"
             }
           }
