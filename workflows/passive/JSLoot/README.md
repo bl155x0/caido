@@ -1,8 +1,8 @@
 # JSLoot
 
-These passive workflows utilize [jsloot](https://github.com/bl155x0/jsloot) to gather all identified JavaScript files from a target while browsing with `caido`.
+This passive workflow utilizes [jsloot](https://github.com/bl155x0/jsloot) to gather all identified JavaScript from a target while browsing with `caido` — both plain JavaScript responses and HTML pages that contain an inline `<script>` tag (stored as the whole HTML page, not just the extracted script content).
 
-- Import the workflows to `caido` 
+- Import the workflow to `caido` 
 - Set the following variables in `~/.config/jsloot/env`
 
 ```
