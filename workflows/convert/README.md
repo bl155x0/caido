@@ -30,3 +30,19 @@ Converts a flat JSON object into a URL query string, e.g. `{"a":"1","b":"2"}` �
 
 Converts a URL query string into a JSON object, e.g. `a=1&b=2` → `{"a":"1","b":"2"}`. The inverse of **JSON to Query**.
 
+## Non-Recursive Path Traversal Filter Defeater
+
+Rewrites every `../` in the input to `....//` to bypass path traversal filters that strip `../` with a single, **non-recursive** search-and-replace (e.g. `../../../etc/passwd` → `....//....//....//etc/passwd`).
+
+The bypass works because `....//` contains `../` as a substring. When the server removes that one occurrence, the surrounding characters collapse back into a valid `../`:
+
+```
+.  .  .  .  /  /
+      └──┴──┘      "../" is removed by the filter
+.  .        /      what remains → "../"
+```
+
+So after the filter runs once, `....//....//....//etc/passwd` becomes `../../../etc/passwd` and the traversal survives.
+
+**Note:** This only defeats *non-recursive* filters (a single pass). If the server strips `../` in a loop until none remain, use URL-encoding (`%2e%2e%2f`) or double-encoding (`%252e%252e%252f`) instead.
+
