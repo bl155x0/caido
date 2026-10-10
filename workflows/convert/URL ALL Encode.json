@@ -1,0 +1,91 @@
+{
+  "description": "",
+  "edition": 2,
+  "graph": {
+    "edges": [
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 0
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 2
+        }
+      },
+      {
+        "source": {
+          "exec_alias": "exec",
+          "node_id": 2
+        },
+        "target": {
+          "exec_alias": "exec",
+          "node_id": 1
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "alias": "convert_start",
+        "definition_id": "caido/convert-start",
+        "display": {
+          "x": -80,
+          "y": 20
+        },
+        "id": 0,
+        "name": "Convert Start",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "convert_end",
+        "definition_id": "caido/convert-end",
+        "display": {
+          "x": 310,
+          "y": 20
+        },
+        "id": 1,
+        "inputs": [
+          {
+            "alias": "data",
+            "value": {
+              "data": "$javascript.data",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "Convert End",
+        "version": "0.1.0"
+      },
+      {
+        "alias": "javascript",
+        "definition_id": "caido/code-js",
+        "display": {
+          "x": 130,
+          "y": 20
+        },
+        "id": 2,
+        "inputs": [
+          {
+            "alias": "code",
+            "value": {
+              "data": "/**\n * @param {NodeInput} input\n * @param {SDK} sdk\n * @returns {MaybePromise<NodeResult | Data>}\n */\nexport function run({ data, extra }, sdk) {\n    let parsed = sdk.asString(data);\n    let out = \"\";\n    for (const c of parsed) {\n      const enc = encodeURIComponent(c);\n      // encodeURIComponent lässt A-Z a-z 0-9 - _ . ! ~ * ' ( ) roh → manuell encoden\n      out += enc === c\n        ? \"%\" + c.charCodeAt(0).toString(16).padStart(2, \"0\")\n        : enc.toLowerCase();\n    }\n    sdk.console.log(out);\n    return {\n      data: out,\n      extra\n    };\n  }\n",
+              "kind": "string"
+            }
+          },
+          {
+            "alias": "data",
+            "value": {
+              "data": "$convert_start.data",
+              "kind": "ref"
+            }
+          }
+        ],
+        "name": "JavaScript",
+        "version": "2.0.0"
+      }
+    ]
+  },
+  "id": "ad1dcf9e-29f4-40cf-8669-9bc3f9d75322",
+  "kind": "convert",
+  "name": "URL ALL Encode"
+}

@@ -30,6 +30,16 @@ Converts a flat JSON object into a URL query string, e.g. `{"a":"1","b":"2"}` �
 
 Converts a URL query string into a JSON object, e.g. `a=1&b=2` → `{"a":"1","b":"2"}`. The inverse of **JSON to Query**.
 
+## URL ALL Encode
+
+URL-encodes **every** character as `%XX`, not just the structural ones — including letters, digits, `.`, `/` and `~` (e.g. `../a.php` → `%2e%2e%2f%61%2e%70%68%70`). This mirrors Burp's "URL-encode all characters" and is useful when a server, WAF, or filter only normalizes the characters it recognizes. Non-ASCII input is encoded as UTF-8 (e.g. `ä` → `%c3%a4`), and hex is written in lowercase.
+
+For double-encoding (`.` → `%2e` → `%252e`), run the workflow twice.
+
+## URL ALL Decode
+
+The inverse of **URL ALL Encode**: decodes every `%XX` sequence back to its original character, including multi-byte UTF-8 (e.g. `%c3%a4` → `ä`). Hex case is ignored. Invalid sequences (e.g. `%zz` or a truncated `%c3`) are left untouched instead of aborting. Each run removes one layer, so double-encoded input needs two passes.
+
 ## Non-Recursive Path Traversal Filter Defeater
 
 Rewrites every `../` in the input to `....//` to bypass path traversal filters that strip `../` with a single, **non-recursive** search-and-replace (e.g. `../../../etc/passwd` → `....//....//....//etc/passwd`).

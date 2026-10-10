@@ -18,6 +18,7 @@ Transform a selection in the request/response editor through a `Convert Start` �
 - **HEX encode / HEX decode** — to and from uppercase hexadecimal.
 - **HTML Encode / HTML Decode** — HTML-entity encoding and decoding.
 - **JSON to Query / Query to JSON** — convert between a flat JSON object and a URL query string.
+- **URL ALL Encode / URL ALL Decode** — encode every character as `%XX` (like Burp's "URL-encode all characters") and back, including multi-byte UTF-8.
 - **Non-Recursive Path Traversal Filter Defeater** — rewrites `../` to `....//` to probe single-pass traversal filters.
 
 ### Passive
